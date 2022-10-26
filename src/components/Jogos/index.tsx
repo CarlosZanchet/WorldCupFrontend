@@ -1,5 +1,5 @@
+import { Button } from "coheza-ui";
 import { Game } from "../../entities/Game";
-import { Button } from "../Form/Button";
 import { primeiraRodada } from "../utils/Jogos";
 import { CardJogo } from "./CardJogo";
 

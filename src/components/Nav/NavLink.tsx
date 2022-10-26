@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { NavLink as RouterLink } from "react-router-dom";
 
 interface NavLinkProps {
-  icon: ReactElement;
+  icon?: ReactElement;
   children: string;
   path: string;
 }
@@ -18,7 +18,7 @@ export function NavLink({ icon, children, path }: NavLinkProps) {
           }
           to={path}
         >
-          <div className="flex flex-row items-center font-semibold gap-1">
+          <div className="flex flex-row items-center gap-1">
             {icon}
             {children}
           </div>

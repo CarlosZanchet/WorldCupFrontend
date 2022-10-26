@@ -1,10 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.tsx'],
+  content: ['./src/**/*.tsx', './node_modules/coheza-ui/**/*.{js,ts,jsx,tsx}'],
   theme: {
     fontSize: {
-      xs: 14,
-      sm: 16,
+      xxs: 11,
+      xs: 13,
+      sm: 15,
       md: 18,
       lg: 20,
       xl: 24,
@@ -14,20 +15,35 @@ module.exports = {
       white: '#fff',
       black: '#000',
       transparent: 'transparent',
+      'input-bg': '#18181b',
+      label: '#E1E1E6',
 
-      gray: {
-        '50': '#f4f4f5',
-        '300': '#d4d4d8',
-        '700': '#3f3f46'
+      default: {
+        '900': '#121214',
+        '800': '#202024',
+        '700': '#374151',
+        '600': '#52525B',
+        '400': '#7C7C8A',
+        '200': '#C4C4CC',
+        '100': '#E1E1E6',
+        'hover': '#2D3644',
+        'disabled': '#aaa',
+        'background': '#1c1c1c',
+        'color': '#bdbdbd',
       },
       primary: {
-        'contrast': '#f4f4f5',
-        '900': '#7f1d1d',
-        '800': '#991b1b',
+        'contrast': '#e0e0e0',
+        'disabled': '#aaa',
+        'hover': '#094132',
+        '900': '#064E3B',
+        '800': '#1E4620',
+        '700': '#047857',
+        '400': '#15803d'
       },
       secondary: {
-        'contrast': '#f4f4f5',
+        'contrast': '#e0e0e0',
         'hover': '#854D0E',
+        'disabled': '#aaa',
         '700': '#A16207',
         '600': '#ca8a04'
       },
