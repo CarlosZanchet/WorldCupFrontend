@@ -5,21 +5,24 @@ interface NavLinkProps {
   icon?: ReactElement;
   children: string;
   path: string;
+  className?: string;
 }
 
-export function NavLink({ icon, children, path }: NavLinkProps) {
+export function NavLink({ icon, children, path, className }: NavLinkProps) {
   return (
       <div >
         <RouterLink
           className={(navigationData) =>
             navigationData.isActive ? 
-            "text-primary-800 border-b-[3px] border-primary-800 border-solid flex h-14" : 
-            "text-gray-700"
+            `text-white bg-primary-900 rounded-md flex transition-colors bg-opacity-40 hover:bg-opacity-60 ${!!className && className}` : 
+            `text-default-400  flex rounded-md transition-colors hover:bg-default-900 hover:bg-opacity-40 ${!!className && className}`
           }
           to={path}
         >
-          <div className="flex flex-row items-center gap-1">
+          <div className="flex flex-row text-xs items-center gap-5 px-6 py-3">
+            <span className="text-xl flex items-center">
             {icon}
+            </span>
             {children}
           </div>
         </RouterLink>

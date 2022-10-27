@@ -15,12 +15,12 @@ module.exports = {
       white: '#fff',
       black: '#000',
       transparent: 'transparent',
-      'input-bg': '#18181b',
+      'input-bg': '#0a0a0e',
       label: '#E1E1E6',
 
       default: {
-        '900': '#121214',
-        '800': '#202024',
+        '900': '#14131a',
+        '800': '#191922',
         '700': '#374151',
         '600': '#52525B',
         '400': '#7C7C8A',
@@ -66,7 +66,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: 'Inter, sans-serif'
+        sans: 'Cairo, sans-serif'
       }
     },
   },
