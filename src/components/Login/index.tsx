@@ -1,17 +1,40 @@
 import { Box, Button, Text, TextField, useToast } from "coheza-ui";
+import { useEffect, useState } from "react";
 import { FaCheck, FaLock, FaUser } from "react-icons/fa";
+import { HiLogout } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import api from "../../api/api";
+import { authLogin } from "../../services/AuthService";
+import { getTokenCookie, removeAllCookies, setTokenCookie, setUsuarioLogadoCookie } from "../../utils/CookiesUtil";
 
 export function Login() {
-
   const { showNotification } = useToast();
   const navigate = useNavigate();
 
-  function handleLogin() {
-    //showNotification('danger', 'Usuário ou senha incorretas.')
-    navigate('/')
-  }
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
+  useEffect(() => {
+    const token = getTokenCookie();
+    if(token) {
+      navigate('/dashboard')
+    }
+  }, [])
+
+  function handleLogin() {
+    authLogin(username, password).then((response) => {
+      setTokenCookie(response.data.token);
+      setUsuarioLogadoCookie(response.data.user);
+      navigate('/dashboard')
+
+    }).catch((e) => {
+      if(e.response.status === 400) {
+        showNotification('danger', 'Usuário ou senha incorretos.')
+      } else {
+        showNotification('danger', 'Erro interno.')
+      }
+    });
+  }
 
   return (
     <div className="w-full h-screen bg-default-900 flex items-center justify-center">
@@ -22,8 +45,8 @@ export function Login() {
 
         <form className="flex gap-6 flex-col mt-12">
           <div className="flex gap-5 flex-col">
-            <TextField icon={<FaUser />} size="lg" placeholder="Usuário" />
-            <TextField icon={<FaLock />} size="lg" placeholder="Senha" type="password" />
+            <TextField onChange={(event) => setUsername(event.target.value)} icon={<FaUser />} size="lg" placeholder="Usuário" />
+            <TextField onChange={(event) => setPassword(event.target.value)} icon={<FaLock />} size="lg" placeholder="Senha" type="password" />
           </div>
 
           <Button onClick={handleLogin} color="primary" size="lg" leftIcon={<FaCheck />}>Entrar</Button>

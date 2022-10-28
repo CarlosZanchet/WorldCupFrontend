@@ -4,8 +4,22 @@ import { GiSoccerBall } from "react-icons/gi";
 import { MdDashboard, MdOutlineLogout } from "react-icons/md";
 import { Avatar, Box } from "coheza-ui";
 import Logo from "../../assets/logo-branca.png";
+import { useLogin } from "../../context/LoginContext";
+import { useNavigate } from "react-router-dom";
+import { getUsuarioLogadoCookie } from "../../utils/CookiesUtil";
 
 export function Nav() {
+
+  const { logout } = useLogin();
+  const navigate = useNavigate();
+
+  const userLogado = getUsuarioLogadoCookie();
+
+  function handleLogout() {
+    logout();
+    navigate('/login')
+  }
+
   return (
     <nav className="w-full max-w-[250px] h-screen">
       <Box className="h-[97vh] w-full mt-4 flex flex-col gap-10 items-center">
@@ -17,7 +31,7 @@ export function Nav() {
           <Avatar size="xs" />
           <div className="flex flex-col">
             <span className="text-default-100 text-sm">
-              <strong>Olá, </strong>Carlos Zanchet
+              <strong>Olá, </strong>{userLogado.name}
             </span>
             <span className="text-default-100 text-[0.7rem]">
               carlos.zanchet
@@ -36,9 +50,9 @@ export function Nav() {
               Jogos
             </NavLink>
           </div>
-          <NavLink className="text-[#c54b48]" path="/login" icon={<MdOutlineLogout />}>
-            Sair
-          </NavLink>
+          <button onClick={handleLogout} className="text-[#c54b48] flex flex-row items-center justify-center transition-colors gap-3 hover:bg-opacity-10 px-6 py-3 rounded hover:bg-[#c54b48] ">
+            <MdOutlineLogout />Sair
+          </button>
         </div>
       </Box>
     </nav>

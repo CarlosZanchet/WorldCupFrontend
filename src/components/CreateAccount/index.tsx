@@ -1,10 +1,23 @@
-import { Box, Button, Text, TextField } from "coheza-ui";
+import { Box, Button, Text, TextField, useToast } from "coheza-ui";
 import { FaCheck, FaLock, FaTimes, FaUserAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { User } from "../../entities/User";
+import { saveUser } from "../../services/UserService";
 
 export function CreateAccount() {
 
   const navigate = useNavigate();
+  const { showNotification } = useToast();
+
+  function handleCreateUser() {
+    const user = new User(null, 'Carlos Zanchet', 'carloszanchet', '1234');
+
+    saveUser(user).then(() => {
+      showNotification('success', 'Cadastrado com Sucesso.')
+    }).catch((e) => {
+      showNotification('danger', e.response.data.message)
+    })
+  }
 
   return (
     <div className="w-full  h-screen flex items-center justify-center">
@@ -15,8 +28,7 @@ export function CreateAccount() {
 
         <form className="gap-3 flex mt-12 flex-col">
           <div className="flex flex-col gap-3">
-            <TextField size="lg" placeholder="Nome" />
-            <TextField size="lg" placeholder="Sobrenome" />
+            <TextField size="lg" placeholder="Nome Completo" />
           </div>
           <div className="flex flex-col mt-14 gap-3">
             <TextField size="lg" icon={<FaUserAlt />} placeholder="Usuário" />
@@ -34,7 +46,7 @@ export function CreateAccount() {
             />
           </div>
           <footer className="flex flex-col gap-2 mt-6">
-            <Button size="lg" color="primary" leftIcon={<FaCheck />} fullWidth>
+            <Button onClick={handleCreateUser} size="lg" color="primary" leftIcon={<FaCheck />} fullWidth>
               Inscrever-se
             </Button>
             <Button
