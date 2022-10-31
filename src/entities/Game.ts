@@ -1,31 +1,30 @@
 import { Team } from "./Team";
 
  export class Game {
-
   private _date: Date;
   private _stadium: string;
-  private _group: string | null;
-  private _homeTeam: Team | null;
-  private _outsideTeam: Team | null;
-  private _homeScore: number | null;
-  private _outsideScore: number | null;
+  private _group_team: string | null;
+  private _home_team: Team | null;
+  private _outside_team: Team | null;
+  private _home_score: number | null;
+  private _outside_score: number | null;
 
   constructor(
     date: Date, 
     stadium: string, 
-    group: string | null, 
-    homeTeam: Team | null, 
-    outsideTeam: Team | null, 
-    homeScore: number | null , 
-    outsideScore: number | null
+    group_team: string | null, 
+    home_team: Team | null, 
+    outside_team: Team | null, 
+    home_score: number | null , 
+    outside_score: number | null
 ) {
     this._date = date
     this._stadium = stadium
-    this._group = group
-    this._homeTeam = homeTeam
-    this._outsideTeam = outsideTeam
-    this._homeScore = homeScore
-    this._outsideScore = outsideScore
+    this._group_team = group_team
+    this._home_team = home_team
+    this._outside_team = outside_team
+    this._home_score = home_score
+    this._outside_score = outside_score
   }
 
     public get date(): Date {
@@ -44,55 +43,55 @@ import { Team } from "./Team";
         this._stadium = _stadium;
     }
 
-    public get group(): string | null {
-        return this._group;
+    public get group_team(): string | null {
+        return this._group_team;
     }
 
-    public setgroup(_group: string | null) {
-        this._group = _group;
+    public setgroup_team(_group_team: string | null) {
+        this._group_team = _group_team;
     }
 
-    public get homeTeam(): Team | null {
-        return this._homeTeam;
+    public get home_team(): Team | null {
+        return this._home_team;
     }
 
-    public sethomeTeam(_homeTeam: Team | null) {
-        this._homeTeam = _homeTeam;
+    public sethome_team(_home_team: Team | null) {
+        this._home_team = _home_team;
     }
 
-    public get outsideTeam(): Team | null {
-        return this._outsideTeam;
+    public get outside_team(): Team | null {
+        return this._outside_team;
     }
 
-    public setoutsideTeam(_outsideTeam: Team | null) {
-        this._outsideTeam = _outsideTeam;
+    public setoutside_team(_outside_team: Team | null) {
+        this._outside_team = _outside_team;
     }
 
-    public get homeScore(): number | null {
-        return this._homeScore;
+    public get home_score(): number | null {
+        return this._home_score;
     }
 
-    public sethomeScore(_homeScore: number | null) {
-        this._homeScore = _homeScore;
+    public sethome_score(_home_score: number | null) {
+        this._home_score = _home_score;
     }
 
-    public get outsideScore(): number | null {
-        return this._outsideScore;
+    public get outside_score(): number | null {
+        return this._outside_score;
     }
 
-    public setoutsideScore(_outsideScore: number | null) {
-        this._outsideScore = _outsideScore;
+    public setoutside_score(_outside_score: number | null) {
+        this._outside_score = _outside_score;
     }
 
     toJson(): any {
       return {
         date: this._date, 
         stadium: this._stadium, 
-        group: this._group, 
-        homeTeam: this._homeTeam, 
-        outsideTeam: this._outsideTeam, 
-        homeScore: this._homeScore, 
-        outsideScore: this._outsideScore
+        group_team: this._group_team, 
+        home_team: this._home_team, 
+        outside_team: this._outside_team, 
+        home_score: this._home_score, 
+        outside_score: this._outside_score
       }
     }
 

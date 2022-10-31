@@ -24,6 +24,7 @@ export function setUsuarioLogadoCookie(user: User) {
 export function getUsuarioLogadoCookie(): User {
   const { "worldcup.usuariologado": usuario } = parseCookies()
   const u: User = JSON.parse(usuario)
+  console.log('user ', u)
   return new User(u.id, u.name, u.username, u.password).toJson()
 }
 

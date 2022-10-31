@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios"
 import { getTokenCookie, removeAllCookies, setTokenCookie } from "../utils/CookiesUtil"
 
-const baseURL = 'http://localhost:3334/'
+const baseURL = 'http://localhost:3334'
 
 export const api = axios.create({ baseURL })
 
@@ -12,22 +12,6 @@ api.interceptors.request.use(
     if (axiosConfig.headers === undefined) {
       axiosConfig.headers = {}
     }
-
-    async function resetToken(): Promise<void> {
-      await axios
-        .get(`${baseURL}/authenticate`, {
-          headers: {},
-        })
-        .then((response) => {
-          setTokenCookie(response.data.token)
-          token = response.data.token
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }
-
-    await resetToken()
 
     if (token) {
       axiosConfig.headers.Authorization = `Bearer ${token}`

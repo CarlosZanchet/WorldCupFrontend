@@ -2,7 +2,8 @@ import { Button, ButtonGroup, Heading, useToast } from "coheza-ui";
 import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { Game } from "../../entities/Game";
-import { getGamesByStep } from "../../services/WorldCupApiService";
+import { Result } from "../../entities/Result";
+import { getResultByUserAndStep } from "../../services/ResultService";
 import { CardJogo } from "./CardJogo";
 
 const GROUPS: string[] = ["A", "B", "C", "D", "E", "F", "G", "H"];
@@ -11,12 +12,13 @@ export function Jogos() {
   const { showNotification } = useToast();
 
   const [step, setStep] = useState(1);
-  const [games, setGames] = useState<Game[]>([]);
+  const [results, setResults] = useState<Result[]>([]);
 
   useEffect(() => {
-    getGamesByStep(step)
+    setResults([]);
+    getResultByUserAndStep(step.toString())
       .then((response) => {
-        setGames(response.data);
+        setResults(response.data);
       })
       .catch(() => {
         showNotification("danger", "Houve um erro ao carregar os jogos!");
@@ -24,7 +26,7 @@ export function Jogos() {
   }, [step]);
 
   function gamesByGroup(group: string) {
-    return games.filter((games) => games.group === group);
+    return results.filter((result) => result.game.group_team === group);
   }
 
   return (
@@ -88,8 +90,8 @@ export function Jogos() {
           <div className="w-full flex flex-col gap-2 mt-4">
             <span className="font-semibold text-default-100 mt-4 flex">Grupo {group}</span>
             <div className="grid grid-cols-2 gap-1">
-              {gamesByGroup(group).map((game: Game) => (
-                <CardJogo game={game} />
+              {gamesByGroup(group).map((result: Result) => (
+                <CardJogo result={result} />
               ))}
             </div>
           </div>
