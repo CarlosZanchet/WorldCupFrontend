@@ -1,42 +1,41 @@
 import { Heading, Text } from "coheza-ui";
+import { useEffect, useState } from "react";
+import { Bolao } from "../../entities/Bolao";
+import { getBoloesByUser } from "../../services/BolaoService";
+import { getResultByUser } from "../../services/ResultService";
+import { FaRegStar } from "react-icons/fa";
 
 export function Dashboard() {
+  const [boloes, setBoloes] = useState<Bolao[]>([]);
+  const [myPoints, setMyPoints] = useState<number>(0);
+
+  useEffect(() => {
+    getBoloesByUser().then((response) => {
+      setBoloes(response.data);
+    });
+
+    getResultByUser().then((response) => {
+      setMyPoints(response.data);
+    });
+  }, []);
+
   return (
     <div>
       <Heading>Dashboard</Heading>
 
+      <div className="flex flex-col mt-5">
+        <strong className="text-sm text-default-100">Meus Pontos</strong>
+        <strong className="text-2xl text-[#daa520] flex items-center gap-1">
+          <FaRegStar size={18} />
+          {myPoints}
+        </strong>
+      </div>
       <div className="mt-5 gap-5 flex flex-col">
         <Text>Meus Bolões</Text>
-        <div className="bg-default-900">
-          <Text size="sm" className="p-2">Bolão da Ti</Text>
-          <table className="w-full">
-            <tr className="text-default-100 bg-default-900 text-left">
-              <th className="p-2">Posição</th>
-              <th className="p-2">Nome</th>
-              <th className="p-2">Quantidade de Pontos</th>
-            </tr>
-            <tr className="bg-default-700 text-default-100">
-              <td className="p-2">1º</td>
-              <td className="p-2">Carlos Zanchet</td>
-              <td className="p-2">10 pts</td>
-            </tr>
-            <tr className="bg-default-700 text-default-100">
-              <td className="p-2">2º</td>
-              <td className="p-2">Carlos Zanchet</td>
-              <td className="p-2">10 pts</td>
-            </tr>
-            <tr className="bg-default-700 text-default-100">
-              <td className="p-2">3º</td>
-              <td className="p-2">Carlos Zanchet</td>
-              <td className="p-2">10 pts</td>
-            </tr>
-            <tr className="bg-default-700 text-default-100">
-              <td className="p-2">4º</td>
-              <td className="p-2">Carlos Zanchet</td>
-              <td className="p-2">10 pts</td>
-            </tr>
-          </table>
-        </div>
+
+        {boloes.map((bolao) => (
+          <span>{bolao.name}</span>
+        ))}
       </div>
     </div>
   );

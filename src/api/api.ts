@@ -31,8 +31,7 @@ api.interceptors.response.use(
       // window.location.href = '/500'
     } else if (status === 401 || status === 403) {
       removeAllCookies()
-      alert('untoried')
-      // window.location.href = "/login"
+      window.location.href = "/login"
     } else if (status === 404) {
       // window.location.href = '/404'
     }

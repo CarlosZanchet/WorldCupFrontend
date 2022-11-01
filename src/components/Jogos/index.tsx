@@ -5,6 +5,7 @@ import { Game } from "../../entities/Game";
 import { Result } from "../../entities/Result";
 import { getResultByUserAndStep } from "../../services/ResultService";
 import { CardJogo } from "./CardJogo";
+import { CardJogoFinalizado } from "./CardJogoFinalizado";
 
 const GROUPS: string[] = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
@@ -88,10 +89,18 @@ export function Jogos() {
       <div className="grid grid-cols-2 gap-x-8 justify-center w-full items-center ">
         {GROUPS.map((group) => (
           <div className="w-full flex flex-col gap-2 mt-4">
-            <span className="font-semibold text-default-100 mt-4 flex">Grupo {group}</span>
+            <span className="font-semibold text-default-100 mt-4 flex">
+              Grupo {group}
+            </span>
             <div className="grid grid-cols-2 gap-1">
               {gamesByGroup(group).map((result: Result) => (
-                <CardJogo result={result} />
+                <>
+                  {result.game.home_score && result.game.outside_score ? (
+                    <CardJogoFinalizado result={result} />
+                  ) : (
+                    <CardJogo result={result} />
+                  )}
+                </>
               ))}
             </div>
           </div>

@@ -1,12 +1,37 @@
-import { Button, Heading, TextField } from "coheza-ui";
+import { Button, Heading, TextField, useToast } from "coheza-ui";
+import { useEffect, useState } from "react";
 import { HiSearch, HiPlus } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import { clans } from "../utils/ClanUtins";
-import { ItemCla } from "./ItemCla";
+import { Bolao } from "../../entities/Bolao";
+import { getBoloes, saveBolao, signInBolao } from "../../services/BolaoService";
+import { getUsuarioLogadoCookie } from "../../utils/CookiesUtil";
+import { ItemBolao } from "./ItemBolao";
 
 export function ListBolao() {
-
   const navigate = useNavigate();
+  const { showNotification } = useToast();
+
+  const [boloes, setBoloes] = useState<Bolao[]>([]);
+
+  useEffect(() => {
+    getBoloes().then((response) => {
+      setBoloes(response.data);
+      console.log(response.data);
+    });
+  }, []);
+
+  function signIn(bolao: Bolao) {
+    const userLogged = getUsuarioLogadoCookie();
+
+    if (userLogged.id && bolao.id) {
+      signInBolao(userLogged.id, bolao.id).then(() => {
+        showNotification("success", "Inscrição efetuada com sucesso.");
+      }).catch((err) => {
+        console.log(err)
+        showNotification("danger", err.response.data.message)
+      });
+    }
+  }
 
   return (
     <>
@@ -18,13 +43,18 @@ export function ListBolao() {
             Buscar
           </Button>
         </div>
-        <Button onClick={() => navigate('/create-bolao')} color="primary" leftIcon={<HiPlus />} size="xs">
+        <Button
+          onClick={() => navigate("/create-bolao")}
+          color="primary"
+          leftIcon={<HiPlus />}
+          size="xs"
+        >
           Novo Bolão
         </Button>
       </div>
       <div className="flex gap-2 flex-col mt-8 ">
-        {clans.map(cla => (
-          <ItemCla cla={cla} />
+        {boloes.map((bolao) => (
+          <ItemBolao bolao={bolao} signIn={signIn} />
         ))}
       </div>
     </>
