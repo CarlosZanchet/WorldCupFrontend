@@ -27,6 +27,11 @@ export function signInBolao(idUser: string, idBolao: string):  Promise<AxiosResp
   return api.post("/sign-in-bolao", {idUser, idBolao})
 }
 
+export function requestSignIn(bolao: Bolao): Promise<AxiosResponse<void>> {
+  const user = getUsuarioLogadoCookie();
+  return api.post("/request-sign-in", {idUser: user.id, idBolao: bolao.id})
+}
+
 export function getBoloesByUser(): Promise<AxiosResponse<Bolao[]>> {
   const userLogged = getUsuarioLogadoCookie();
   return api.get(`/bolao-by-user/${userLogged.id}`);

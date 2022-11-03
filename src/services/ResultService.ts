@@ -16,8 +16,3 @@ export function getResultByUserAndStep(step: string): Promise<AxiosResponse<Resu
 export function saveResult(result: Result): Promise<AxiosResponse<Result>> {
   return api.post('/result', convertResult(result).toJson());
 }
-
-export function getResultByUser(): Promise<AxiosResponse<number>> {
-  const user = getUsuarioLogadoCookie();
-  return api.get(`/score-by-user/${user.id}`)
-}

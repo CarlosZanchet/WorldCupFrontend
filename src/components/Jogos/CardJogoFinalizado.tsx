@@ -11,34 +11,20 @@ interface CardGameProps {
 }
 
 export function CardJogoFinalizado({ result }: CardGameProps) {
-  const [homeScore, setHomeScore] = useState<number | undefined>(
-    result.home_result
-  );
-  const [outsideScore, setOutsideScore] = useState<number | undefined>(
-    result.outside_result
-  );
 
-  function handleSaveResult() {
-    result.home_result = homeScore;
-    result.outside_result = outsideScore;
-    saveResult(result);
+  function resulComparer(value1: number | null, value2: number | null): boolean {
+    if(value1 && value2) {
+      if(value1 > value2) return true;
+    }
+    
+    return false;
   }
 
-  function handleHome(event: any) {
-    setHomeScore(event.target.value);
-  }
-
-  function handleOutside(event: any) {
-    setOutsideScore(event.target.value);
-  }
 
   return (
     <div className="flex flex-col">
       <div
-        className={clsx(" flex flex-col max-w-[250px] px-2 py-1", {
-          "bg-primary-400 bg-opacity-20": !!homeScore && !!outsideScore,
-          "bg-default-900": homeScore == null || outsideScore == null,
-        })}
+        className="flex flex-col max-w-[250px] px-2 py-1 bg-primary-400 bg-opacity-20"
       >
         <div className="flex flex-col items-center justify-center mb-2">
           <span className="text-xs text-default-100 flex items-center gap-1">
@@ -51,15 +37,15 @@ export function CardJogoFinalizado({ result }: CardGameProps) {
           </span>
         </div>
         <div className="flex flex-row justify-between items-center mb-2">
-          <div className="flex flex-col items-center text-center justify-center ">
-            <img src={result.game.home_team?.urlflag} width={40} alt="" />
+          <div className="flex flex-col items-center text-center justify-center">
+            <img src={result.game.home_team?.urlflag} className={resulComparer(result.game.outside_score, result.game.home_score) ? 'grayscale opacity-30' : ""} width={40} alt="" />
             <span className="text-[0.65rem] text-default-100">{result.game.home_team?.name}</span>
           </div>
           <strong className="text-default-100 text-xl">{result.home_result}</strong>
           <div className="text-default-200 font-bold">x</div>
           <strong className="text-default-100 text-xl">{result.outside_result}</strong>
           <div className="flex flex-col items-center justify-center text-center">
-            <img src={result.game.outside_team?.urlflag} width={40} alt="" />
+            <img src={result.game.outside_team?.urlflag} className={resulComparer(result.game.home_score, result.game.outside_score) ? 'grayscale opacity-30' : ""} width={40} alt="" />
             <span className="text-[0.65rem] text-default-100">{result.game.outside_team?.name}</span>
           </div>
         </div>

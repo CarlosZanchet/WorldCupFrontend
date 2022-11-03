@@ -3,14 +3,21 @@ import { FaCheck, FaLock, FaTimes, FaUserAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../entities/User";
 import { saveUser } from "../../services/UserService";
+import { Formik, FormikValues } from "formik";
+import * as Yup from "yup";
 
 export function CreateAccount() {
-
   const navigate = useNavigate();
   const { showNotification } = useToast();
 
-  function handleCreateUser() {
-    const user = new User(null, 'Carlos Zanchet', 'carloszanchet', '1234');
+  function handleSubmitForm(values: FormikValues) {
+    const user = new User(
+      null,
+      values.name,
+      values.username,
+      values.password,
+      []
+    ).toJson();
 
     saveUser(user).then(() => {
       showNotification('success', 'Cadastrado com Sucesso.')
@@ -26,41 +33,83 @@ export function CreateAccount() {
           Create Account
         </Text>
 
-        <form className="gap-3 flex mt-12 flex-col">
-          <div className="flex flex-col gap-3">
-            <TextField size="lg" placeholder="Nome Completo" />
-          </div>
-          <div className="flex flex-col mt-14 gap-3">
-            <TextField size="lg" icon={<FaUserAlt />} placeholder="Usuário" />
-            <TextField
-              size="lg"
-              icon={<FaLock />}
-              type="password"
-              placeholder="Senha"
-            />
-            <TextField
-              size="lg"
-              icon={<FaLock />}
-              type="password"
-              placeholder="Confirmar Senha"
-            />
-          </div>
-          <footer className="flex flex-col gap-2 mt-6">
-            <Button onClick={handleCreateUser} size="lg" color="primary" leftIcon={<FaCheck />} fullWidth>
-              Inscrever-se
-            </Button>
-            <Button
-              size="xs"
-              variant="text"
-              color="secondary"
-              leftIcon={<FaTimes />}
-              fullWidth
-              onClick={() => navigate('/login')}
-            >
-              Cancelar
-            </Button>
-          </footer>
-        </form>
+        <Formik
+          enableReinitialize
+          initialValues={{
+            name: "",
+            username: "",
+            password: "",
+          }}
+          validationSchema={Yup.object().shape({
+            //name: Yup.string().nullable().required("Informe um nome"),
+          })}
+          onSubmit={handleSubmitForm}
+        >
+          {({
+            errors,
+            handleChange,
+            handleSubmit,
+            touched,
+            setFieldValue,
+            values,
+          }) => (
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3">
+                <TextField
+                  name="name"
+                  onChange={handleChange}
+                  size="lg"
+                  placeholder="Nome Completo"
+                />
+              </div>
+              <div className="flex flex-col mt-14 gap-3">
+                <TextField
+                  name="username"
+                  onChange={handleChange}
+                  size="lg"
+                  icon={<FaUserAlt />}
+                  placeholder="Usuário"
+                />
+                <TextField
+                  size="lg"
+                  name="password"
+                  icon={<FaLock />}
+                  onChange={handleChange}
+                  type="password"
+                  placeholder="Senha"
+                />
+                <TextField
+                  size="lg"
+                  icon={<FaLock />}
+                  onChange={handleChange}
+                  type="password"
+                  placeholder="Confirmar Senha"
+                />
+              </div>
+              <footer className="flex flex-col gap-2 mt-6">
+                <Button
+                  type="submit"
+                  size="lg"
+                  color="primary"
+                  leftIcon={<FaCheck />}
+                  fullWidth
+                >
+                  Inscrever-se
+                </Button>
+                <Button
+                  size="xs"
+                  variant="text"
+                  color="secondary"
+                  leftIcon={<FaTimes />}
+                  fullWidth
+                  onClick={() => navigate("/login")}
+                >
+                  Cancelar
+                </Button>
+              </footer>
+            </form>
+          )}
+        </Formik>
       </Box>
     </div>
   );

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { HiSearch, HiPlus } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { Bolao } from "../../entities/Bolao";
-import { getBoloes, saveBolao, signInBolao } from "../../services/BolaoService";
+import { getBoloes, getBoloesByUser, requestSignIn, saveBolao, signInBolao } from "../../services/BolaoService";
 import { getUsuarioLogadoCookie } from "../../utils/CookiesUtil";
 import { ItemBolao } from "./ItemBolao";
 
@@ -27,10 +27,17 @@ export function ListBolao() {
       signInBolao(userLogged.id, bolao.id).then(() => {
         showNotification("success", "Inscrição efetuada com sucesso.");
       }).catch((err) => {
-        console.log(err)
         showNotification("danger", err.response.data.message)
       });
     }
+  }
+
+  function handleRequestSignIn(bolao: Bolao) {
+    requestSignIn(bolao).then(() => {
+      showNotification("success", "Solicitação enviada com sucesso.");
+    }).catch((err) => {
+      showNotification("danger", err.response.data.message)
+    });
   }
 
   return (
@@ -38,7 +45,7 @@ export function ListBolao() {
       <Heading>Bolão</Heading>
       <div className="flex justify-between items-center mt-4">
         <div className="flex gap-5 items-center">
-          <TextField placeholder="Buscar Clã" size="sm" />
+          <TextField placeholder="Buscar Bolão" size="sm" />
           <Button color="primary" leftIcon={<HiSearch />} size="sm">
             Buscar
           </Button>
@@ -54,7 +61,7 @@ export function ListBolao() {
       </div>
       <div className="flex gap-2 flex-col mt-8 ">
         {boloes.map((bolao) => (
-          <ItemBolao bolao={bolao} signIn={signIn} />
+          <ItemBolao bolao={bolao} signIn={signIn} requestSignIn={handleRequestSignIn}  />
         ))}
       </div>
     </>
