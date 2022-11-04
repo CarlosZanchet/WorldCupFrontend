@@ -39,6 +39,7 @@ export function CreateAccount() {
             name: "",
             username: "",
             password: "",
+            confirmPassword: ""
           }}
           validationSchema={Yup.object().shape({
             //name: Yup.string().nullable().required("Informe um nome"),
@@ -57,6 +58,7 @@ export function CreateAccount() {
               <div className="flex flex-col gap-3">
                 <TextField
                   name="name"
+                  autoComplete="off"
                   onChange={handleChange}
                   size="lg"
                   placeholder="Nome Completo"
@@ -69,10 +71,12 @@ export function CreateAccount() {
                   size="lg"
                   icon={<FaUserAlt />}
                   placeholder="Usuário"
+                  autoComplete="off"
                 />
                 <TextField
                   size="lg"
                   name="password"
+                  autoComplete="off"
                   icon={<FaLock />}
                   onChange={handleChange}
                   type="password"
@@ -80,6 +84,8 @@ export function CreateAccount() {
                 />
                 <TextField
                   size="lg"
+                  autoComplete="off"
+                  name="confirmPassword"
                   icon={<FaLock />}
                   onChange={handleChange}
                   type="password"
@@ -93,6 +99,7 @@ export function CreateAccount() {
                   color="primary"
                   leftIcon={<FaCheck />}
                   fullWidth
+                  disabled={!values.name || !values.username || !values.password || !values.confirmPassword || (values.password !== values.confirmPassword)}
                 >
                   Inscrever-se
                 </Button>
