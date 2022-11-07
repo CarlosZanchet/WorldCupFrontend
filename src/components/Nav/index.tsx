@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { getUsuarioLogadoCookie } from "../../utils/CookiesUtil";
 import { SolicitacaoCard } from "../SolicitacaoInscricao/SolicitacaoCard";
 import { useEffect } from "react";
-import { findRequestByUser } from "../../services/UserService";
 import { useRequests } from "../../context/RequestContext";
 
 export function Nav() {
