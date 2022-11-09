@@ -1,7 +1,6 @@
 import { Team } from "./Team";
 
  export class Game {
-
   private _date: Date;
   private _stadium: string;
   private _group_team: string | null;

@@ -13,22 +13,6 @@ api.interceptors.request.use(
       axiosConfig.headers = {}
     }
 
-    async function resetToken(): Promise<void> {
-      await axios
-        .get(`${baseURL}/authenticate`, {
-          headers: {},
-        })
-        .then((response) => {
-          setTokenCookie(response.data.token)
-          token = response.data.token
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }
-
-    await resetToken()
-
     if (token) {
       axiosConfig.headers.Authorization = `Bearer ${token}`
     }
@@ -47,8 +31,7 @@ api.interceptors.response.use(
       // window.location.href = '/500'
     } else if (status === 401 || status === 403) {
       removeAllCookies()
-      alert('untoried')
-      // window.location.href = "/login"
+      window.location.href = "/login"
     } else if (status === 404) {
       // window.location.href = '/404'
     }

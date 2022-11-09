@@ -1,7 +1,7 @@
 import { Box, Button, Text, TextField, useToast } from "coheza-ui";
 import { useEffect, useState } from "react";
 import { FaCheck, FaLock, FaUser } from "react-icons/fa";
-import { HiLogout } from "react-icons/hi";
+import logocup from "../../assets/logo2.png";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/api";
 import { authLogin } from "../../services/AuthService";
@@ -38,10 +38,8 @@ export function Login() {
 
   return (
     <div className="w-full h-screen bg-default-900 flex items-center justify-center">
-      <Box className="w-full  p-8 max-w-xs">
-        <Text className="mb-4 flex" size="sm">
-          Title
-        </Text>
+      <Box className="w-full flex flex-col items-center  p-8 max-w-xs">
+        <img width={150} src={logocup} alt="cuplogo" />
 
         <form className="flex gap-6 flex-col mt-12">
           <div className="flex gap-5 flex-col">

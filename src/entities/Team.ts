@@ -1,25 +1,24 @@
 export class Team {
-
   private _id: string;
   private _name: string;
   private _group_team: string;
   private _urlflag: string;
 
-    public get id(): string {
-      return this._id;
-    }
+  public get id(): string {
+    return this._id;
+  }
 
-    public set id(id: string) {
-      this._id = id;
-    }
+  public set id(id: string) {
+    this._id = id;
+  }
 
-    public get name(): string {
-        return this._name;
-    }
+  public get name(): string {
+    return this._name;
+  }
 
-    public set name(name: string) {
-        this._name = name;
-    }
+  public set name(name: string) {
+    this._name = name;
+  }
 
     public get urlflag(): string {
         return this._urlflag;

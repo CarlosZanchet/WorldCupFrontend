@@ -23,6 +23,9 @@ export function setUsuarioLogadoCookie(user: User) {
 
 export function getUsuarioLogadoCookie(): User {
   const { "worldcup.usuariologado": usuario } = parseCookies()
+  if(usuario === undefined) {
+    window.location.href = '/login'
+  }
   const u: User = JSON.parse(usuario)
   return new User(u.id, u.name, u.username, u.password).toJson()
 }
