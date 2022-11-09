@@ -2,7 +2,8 @@ export class Team {
 
   private _id: string;
   private _name: string;
-  private _urlFlag: string;
+  private _group_team: string;
+  private _urlflag: string;
 
     public get id(): string {
       return this._id;
@@ -20,26 +21,36 @@ export class Team {
         this._name = name;
     }
 
-    public get urlFlag(): string {
-        return this._urlFlag;
+    public get urlflag(): string {
+        return this._urlflag;
     }
 
-    public set urlFlag(urlFlag: string) {
-        this._urlFlag = urlFlag;
+    public set urlflag(urlflag: string) {
+        this._urlflag = urlflag;
     }
 
+    public get group_team(): string {
+      return this._group_team;
+  }
 
-  constructor(id: string, name: string, urlFlag: string) {
+  public set group_team(group_team: string) {
+      this._group_team = group_team;
+  }
+
+
+  constructor(id: string, name: string, urlflag: string, group_team: string) {
     this._id = id
     this._name = name
-    this._urlFlag = urlFlag
+    this._urlflag = urlflag
+    this._group_team = group_team
   }
 
   toJson(): any {
     return {
       id: this._id,
       name: this._name,
-      urlFlag: this._urlFlag
+      urlflag: this._urlflag,
+      group_team: this._group_team
     }
   }
 }

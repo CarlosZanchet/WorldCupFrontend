@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios"
 import { getTokenCookie, removeAllCookies, setTokenCookie } from "../utils/CookiesUtil"
 
-const baseURL = 'http://localhost:3334/'
+const baseURL = 'http://localhost:3334'
 
 export const api = axios.create({ baseURL })
 

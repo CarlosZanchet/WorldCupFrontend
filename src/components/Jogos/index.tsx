@@ -2,7 +2,7 @@ import { Button, ButtonGroup, Heading, useToast } from "coheza-ui";
 import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { Game } from "../../entities/Game";
-import { getGamesByStep } from "../../services/WorldCupApiService";
+import { getGamesByUserAndStep } from "../../services/GameService";
 import { CardJogo } from "./CardJogo";
 
 const GROUPS: string[] = ["A", "B", "C", "D", "E", "F", "G", "H"];
@@ -14,7 +14,7 @@ export function Jogos() {
   const [games, setGames] = useState<Game[]>([]);
 
   useEffect(() => {
-    getGamesByStep(step)
+    getGamesByUserAndStep(step.toString())
       .then((response) => {
         setGames(response.data);
       })
@@ -24,7 +24,7 @@ export function Jogos() {
   }, [step]);
 
   function gamesByGroup(group: string) {
-    return games.filter((games) => games.group === group);
+    return games.filter((games) => games.group_team === group);
   }
 
   return (
