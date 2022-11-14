@@ -15,7 +15,7 @@
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
     "moduleResolution": "Node",
-    "outDir": "./dist/esm",
+    "outDir": "./dist",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": false,
