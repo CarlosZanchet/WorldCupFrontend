@@ -2,6 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-run
 import { Button, ButtonGroup, Heading, useToast } from "coheza-ui";
 import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
+import { getGamesByUserAndStep } from "../../services/GameService";
 import { getResultByUserAndStep } from "../../services/ResultService";
 import { getStepsActive } from "../../services/StepsService";
 import { CardJogo } from "./CardJogo";
@@ -13,6 +14,7 @@ export function Jogos() {
     const [results, setResults] = useState([]);
     const [steps, setSteps] = useState([]);
     useEffect(() => {
+        getGamesByUserAndStep(step.toString());
         getStepsActive().then((response) => {
             setSteps(response.data);
         });

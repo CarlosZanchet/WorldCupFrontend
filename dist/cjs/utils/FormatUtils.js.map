@@ -1,1 +1,0 @@
-{"version":3,"file":"FormatUtils.js","sourceRoot":"","sources":["../../../src/utils/FormatUtils.ts"],"names":[],"mappings":";;;AAAA,SAAgB,UAAU,CAAC,IAAU;IACnC,IAAG,IAAI,EAAE;QACP,OAAO,IAAI,IAAI,CAAC,cAAc,CAAC,OAAO,EAAE,EAAC,QAAQ,EAAE,KAAK,EAAC,CAAC,CAAC,MAAM,CAAC,IAAI,IAAI,CAAC,IAAI,CAAC,CAAC,CAAA;KAClF;IACD,OAAO,EAAE,CAAC;AACZ,CAAC;AALD,gCAKC"}

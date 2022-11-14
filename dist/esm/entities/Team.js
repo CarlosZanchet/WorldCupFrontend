@@ -1,8 +1,8 @@
 export class Team {
     _id;
     _name;
-    _urlflag;
     _group_team;
+    _urlflag;
     get id() {
         return this._id;
     }

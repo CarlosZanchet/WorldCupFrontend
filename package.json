@@ -1,14 +1,11 @@
 {
   "name": "worldcup2022",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
-    "build": "yarn build:esm && yarn build:cjs",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir dist/cjs"
+    "build": "tsc"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.1",

@@ -18,43 +18,43 @@ export class Game {
     get date() {
         return this._date;
     }
-    setdate(_date) {
+    set date(_date) {
         this._date = _date;
     }
     get stadium() {
         return this._stadium;
     }
-    setstadium(_stadium) {
+    set stadium(_stadium) {
         this._stadium = _stadium;
     }
     get group_team() {
         return this._group_team;
     }
-    setgroup_team(_group_team) {
+    set group_team(_group_team) {
         this._group_team = _group_team;
     }
     get home_team() {
         return this._home_team;
     }
-    sethome_team(_home_team) {
+    set home_team(_home_team) {
         this._home_team = _home_team;
     }
     get outside_team() {
         return this._outside_team;
     }
-    setoutside_team(_outside_team) {
+    set outside_team(_outside_team) {
         this._outside_team = _outside_team;
     }
     get home_score() {
         return this._home_score;
     }
-    sethome_score(_home_score) {
+    set home_score(_home_score) {
         this._home_score = _home_score;
     }
     get outside_score() {
         return this._outside_score;
     }
-    setoutside_score(_outside_score) {
+    set outside_score(_outside_score) {
         this._outside_score = _outside_score;
     }
     toJson() {
