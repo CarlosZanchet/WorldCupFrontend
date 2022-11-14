@@ -16,7 +16,7 @@ const RequestProvider = ({ children }) => {
             setRequests(response.data);
         });
     }
-    return ((0, jsx_runtime_1.jsx)(exports.RequestContext.Provider, Object.assign({ value: { requests, findRequest, removeRequest } }, { children: children })));
+    return ((0, jsx_runtime_1.jsx)(exports.RequestContext.Provider, { value: { requests, findRequest, removeRequest }, children: children }));
 };
 exports.RequestProvider = RequestProvider;
 const useRequests = () => {

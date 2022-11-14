@@ -9,7 +9,7 @@ const LoginProvider = ({ children }) => {
     function logout() {
         (0, CookiesUtil_1.removeAllCookies)();
     }
-    return ((0, jsx_runtime_1.jsx)(exports.LoginContext.Provider, Object.assign({ value: { logout } }, { children: children })));
+    return ((0, jsx_runtime_1.jsx)(exports.LoginContext.Provider, { value: { logout }, children: children }));
 };
 exports.LoginProvider = LoginProvider;
 const useLogin = () => {

@@ -22,7 +22,7 @@ function Dashboard() {
             setMyPoints(score);
         });
     }, []);
-    return ((0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)(coheza_ui_1.Heading, { children: "Dashboard" }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "flex flex-col mt-3" }, { children: [(0, jsx_runtime_1.jsx)("strong", Object.assign({ className: "text-sm text-default-100" }, { children: "Meus Pontos" })), (0, jsx_runtime_1.jsxs)("strong", Object.assign({ className: "text-2xl text-[#daa520] flex items-center gap-1" }, { children: [(0, jsx_runtime_1.jsx)(fa_1.FaRegStar, { size: 18 }), myPoints] }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "mt-5 gap-2 flex flex-col" }, { children: [(0, jsx_runtime_1.jsx)(coheza_ui_1.Text, { children: "Meus Bol\u00F5es" }), boloes.map((bolao) => ((0, jsx_runtime_1.jsx)(CardBolao_1.CardBolao, { bolao: bolao }, bolao.id)))] }))] }));
+    return ((0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)(coheza_ui_1.Heading, { children: "Dashboard" }), (0, jsx_runtime_1.jsxs)("div", { className: "flex flex-col mt-3", children: [(0, jsx_runtime_1.jsx)("strong", { className: "text-sm text-default-100", children: "Meus Pontos" }), (0, jsx_runtime_1.jsxs)("strong", { className: "text-2xl text-[#daa520] flex items-center gap-1", children: [(0, jsx_runtime_1.jsx)(fa_1.FaRegStar, { size: 18 }), myPoints] })] }), (0, jsx_runtime_1.jsxs)("div", { className: "mt-5 gap-2 flex flex-col", children: [(0, jsx_runtime_1.jsx)(coheza_ui_1.Text, { children: "Meus Bol\u00F5es" }), boloes.map((bolao) => ((0, jsx_runtime_1.jsx)(CardBolao_1.CardBolao, { bolao: bolao }, bolao.id)))] })] }));
 }
 exports.Dashboard = Dashboard;
 //# sourceMappingURL=index.js.map

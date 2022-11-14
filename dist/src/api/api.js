@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -17,7 +8,7 @@ const axios_1 = __importDefault(require("axios"));
 const CookiesUtil_1 = require("../utils/CookiesUtil");
 const baseURL = 'http://localhost:3334';
 exports.api = axios_1.default.create({ baseURL });
-exports.api.interceptors.request.use((axiosConfig) => __awaiter(void 0, void 0, void 0, function* () {
+exports.api.interceptors.request.use(async (axiosConfig) => {
     let token = (0, CookiesUtil_1.getTokenCookie)();
     if (axiosConfig.headers === undefined) {
         axiosConfig.headers = {};
@@ -25,12 +16,13 @@ exports.api.interceptors.request.use((axiosConfig) => __awaiter(void 0, void 0, 
     if (token) {
         axiosConfig.headers.Authorization = `Bearer ${token}`;
     }
-    axiosConfig.headers = Object.assign({}, axiosConfig.headers);
+    axiosConfig.headers = {
+        ...axiosConfig.headers
+    };
     return axiosConfig;
-}));
+});
 exports.api.interceptors.response.use((response) => response, (error) => {
-    var _a;
-    const status = (_a = error.response) === null || _a === void 0 ? void 0 : _a.status;
+    const status = error.response?.status;
     if (status === 500) {
         // window.location.href = '/500'
     }
