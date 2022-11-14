@@ -21,6 +21,7 @@ export function CreateAccount() {
 
     saveUser(user).then(() => {
       showNotification('success', 'Cadastrado com Sucesso.')
+      navigate('/login')
     }).catch((e) => {
       showNotification('danger', e.response.data.message)
     })
@@ -30,7 +31,7 @@ export function CreateAccount() {
     <div className="w-full  h-screen flex items-center justify-center">
       <Box className="w-full p-10 max-w-sm bg-default-800">
         <Text className="mb-4 flex" size="sm">
-          Create Account
+          Criar Conta
         </Text>
 
         <Formik
@@ -42,7 +43,11 @@ export function CreateAccount() {
             confirmPassword: ""
           }}
           validationSchema={Yup.object().shape({
-            //name: Yup.string().nullable().required("Informe um nome"),
+            name: Yup.string().nullable().required("Informe um nome"),
+            username: Yup.string().nullable().required("Informe um username"),
+            password: Yup.string().nullable().required("Informe uma senha"),
+            confirmPassword: Yup.string().nullable().required("Informe novamente a senha")
+            .oneOf([Yup.ref('password')], 'Senhas informadas são diferentes'),
           })}
           onSubmit={handleSubmitForm}
         >
@@ -62,6 +67,8 @@ export function CreateAccount() {
                   onChange={handleChange}
                   size="lg"
                   placeholder="Nome Completo"
+                  error={Boolean(touched.name && errors.name)}
+                  helperText={errors.name}
                 />
               </div>
               <div className="flex flex-col mt-14 gap-3">
@@ -72,6 +79,8 @@ export function CreateAccount() {
                   icon={<FaUserAlt />}
                   placeholder="Usuário"
                   autoComplete="off"
+                  error={Boolean(touched.username && errors.username)}
+                  helperText={errors.username}
                 />
                 <TextField
                   size="lg"
@@ -81,6 +90,8 @@ export function CreateAccount() {
                   onChange={handleChange}
                   type="password"
                   placeholder="Senha"
+                  error={Boolean(touched.password && errors.password)}
+                  helperText={errors.password}
                 />
                 <TextField
                   size="lg"
@@ -90,6 +101,8 @@ export function CreateAccount() {
                   onChange={handleChange}
                   type="password"
                   placeholder="Confirmar Senha"
+                  error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+                  helperText={errors.confirmPassword}
                 />
               </div>
               <footer className="flex flex-col gap-2 mt-6">
@@ -99,7 +112,7 @@ export function CreateAccount() {
                   color="primary"
                   leftIcon={<FaCheck />}
                   fullWidth
-                  disabled={!values.name || !values.username || !values.password || !values.confirmPassword || (values.password !== values.confirmPassword)}
+                  //disabled={!values.name || !values.username || !values.password || !values.confirmPassword || (values.password !== values.confirmPassword)}
                 >
                   Inscrever-se
                 </Button>

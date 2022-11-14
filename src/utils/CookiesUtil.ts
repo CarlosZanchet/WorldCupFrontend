@@ -27,7 +27,7 @@ export function getUsuarioLogadoCookie(): User {
     window.location.href = '/login'
   }
   const u: User = JSON.parse(usuario)
-  return new User(u.id, u.name, u.username, u.password).toJson()
+  return new User(u.id, u.name, u.username, u.password, u.results).toJson()
 }
 
 export function removeAllCookies() {
