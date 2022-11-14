@@ -2,6 +2,7 @@ import { Button, ButtonGroup, Heading, useToast } from "coheza-ui";
 import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { Game } from "../../entities/Game";
+import { getGamesByUserAndStep } from "../../services/GameService";
 import { Result } from "../../entities/Result";
 import { Steps } from "../../entities/Steps";
 import { getResultByUserAndStep } from "../../services/ResultService";
@@ -19,6 +20,7 @@ export function Jogos() {
   const [steps, setSteps] = useState<Steps[]>([]);
 
   useEffect(() => {
+    getGamesByUserAndStep(step.toString())
     getStepsActive().then((response) => {
       setSteps(response.data);
     });

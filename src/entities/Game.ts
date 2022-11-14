@@ -31,7 +31,7 @@ import { Team } from "./Team";
         return this._date;
     }
 
-    public setdate(_date: Date) {
+    public set date(_date: Date) {
         this._date = _date;
     }
 
@@ -39,7 +39,7 @@ import { Team } from "./Team";
         return this._stadium;
     }
 
-    public setstadium(_stadium: string) {
+    public set stadium(_stadium: string) {
         this._stadium = _stadium;
     }
 
@@ -47,7 +47,7 @@ import { Team } from "./Team";
         return this._group_team;
     }
 
-    public setgroup_team(_group_team: string | null) {
+    public set group_team(_group_team: string | null) {
         this._group_team = _group_team;
     }
 
@@ -55,7 +55,7 @@ import { Team } from "./Team";
         return this._home_team;
     }
 
-    public sethome_team(_home_team: Team | null) {
+    public set home_team(_home_team: Team | null) {
         this._home_team = _home_team;
     }
 
@@ -63,7 +63,7 @@ import { Team } from "./Team";
         return this._outside_team;
     }
 
-    public setoutside_team(_outside_team: Team | null) {
+    public set outside_team(_outside_team: Team | null) {
         this._outside_team = _outside_team;
     }
 
@@ -71,7 +71,7 @@ import { Team } from "./Team";
         return this._home_score;
     }
 
-    public sethome_score(_home_score: number | null) {
+    public set home_score(_home_score: number | null) {
         this._home_score = _home_score;
     }
 
@@ -79,7 +79,7 @@ import { Team } from "./Team";
         return this._outside_score;
     }
 
-    public setoutside_score(_outside_score: number | null) {
+    public set outside_score(_outside_score: number | null) {
         this._outside_score = _outside_score;
     }
 
